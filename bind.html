@@ -14,40 +14,57 @@
     <button ng-click="scope.kkk.f=1">button</button>
     <script>
         var scope = {};
-        scope.kkk = {}
-        document.getElementById("1").oninput = function () {
-            if (this.getAttribute('ng-model')) {
-                scope[this.getAttribute('ng-model')] = this.value;
-                let a = this.getAttribute('ng-model');
+        scope.kkk = {};
+        // document.getElementById("1").oninput = function () {
+        //     if (this.getAttribute('ng-model')) {
+        //         scope[this.getAttribute('ng-model')] = this.value;
+        //         let a = this.getAttribute('ng-model');
+        //         [...document.querySelectorAll(`[ng-bind='${a}']`)].forEach(function (x) {
+
+        //             x.innerHTML = scope[a]
+
+        //         })
+        //     }
+        // };
+        [...document.querySelectorAll(`[ng-model]`)].forEach(function (x) {
+            let a = x.getAttribute(`ng-model`)
+            x.oninput = function (v) {
+                Object.keys(scope).forEach(x => {
+                    // console.log(eval('scope.' + x))
+                    
+
+                })
+                scope.kkk.f = this.value;
                 [...document.querySelectorAll(`[ng-bind='${a}']`)].forEach(function (x) {
 
-                    x.innerHTML = scope[a]
+                    x.innerHTML = scope.kkk.f
 
                 })
             }
-        };
+
+        });
         [...document.querySelectorAll(`[ng-click]`)].forEach(function (x) {
             x.onclick = function () {
                 $scope = JSON.parse(JSON.stringify(scope))
+                // console.log($scope)
+                // console.log(scope)
                 eval(x.getAttribute('ng-click'))
-                console.log($scope)
                 console.log(scope)
-                if ($scope != scope) {
-                    console.log(123)
-                    Object.keys(scope).forEach(x => {
+                // if ($scope != scope) {
+                Object.keys(scope).forEach(x => {
+                    // console.log(eval('scope.' + x))
+                    if (eval('scope.' + x) != eval('$scope.' + x)) {
                         console.log(x)
-                        if (eval('scope.' + x) != eval('$scope.' + x)) {
-                            console.log(x)
-                            document.querySelectorAll(`[ng-bind='${x}']`).forEach(y => {
-                                y.innerHTML = eval('scope.' + x)
-                            })
-                            document.querySelectorAll(`[ng-model='${x}']`).forEach(y => {
-                                y.value = eval('scope.' + x)
-                            })
-                        }
+                        document.querySelectorAll(`[ng-bind='${x}']`).forEach(y => {
+                            y.innerHTML = eval(`scope.${x}`)
+                        })
+                        document.querySelectorAll(`[ng-model='${x}']`).forEach(y => {
+                            y.value = eval(`scope.${x}`)
+                        })
+                    }
 
-                    })
-                }
+                })
+                // }
             }
 
 
