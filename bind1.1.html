@@ -11,12 +11,15 @@
 <body>
     <input type="text" name="123" id="1" ng-model="kkk.f">
     <span ng-bind="kkk.f"></span>
-    <button ng-click="scope.kkk.f=1">button</button>
+    <button ng-click="change()">button</button>
     <script>
         var scope = {};
         scope.kkk = {
             f: "122223"
         };
+        function change(){
+            scope.kkk.f=1
+        }
         // console.log(scope)
 
         function TraversalObject(obj, attr, el, par, value) {
