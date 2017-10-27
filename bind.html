@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="123" id="1" ng-model="kkk.f">
+    <span ng-bind="kkk.f"></span>
+    <button ng-click="scope.kkk.f=1">button</button>
+    <script>
+        var scope = {};
+        scope.kkk = {
+            f: "122223"
+        };
+        // console.log(scope)
+
+        function TraversalObject(obj, attr, el, par, value) {
+            for (var a in obj) {
+                if (((par ? par + "." : "") + a) === attr) {
+                    console.log(obj[a])
+                    obj[a] = value
+                    el.innerHTML = obj[a]
+                }
+                if (typeof (obj[a]) == "object") {
+                    TraversalObject(obj[a], attr, el, (par ? par + "." : "") + a, value);
+                }
+            }
+        }
+
+        function TraversalObject2(obj, par) {
+            for (var a in obj) {
+                console.log(((par ? par + "." : "") + a));
+                [...document.querySelectorAll(`[ng-model='${(par ? par + "." : "") + a}']`)].forEach(function (x) {
+                    x.value = obj[a]
+                });
+                [...document.querySelectorAll(`[ng-bind='${(par ? par + "." : "") + a}']`)].forEach(function (x) {
+                    x.innerHTML = obj[a]
+                });
+                if (typeof (obj[a]) == "object") {
+                    TraversalObject2(obj[a], (par ? par + "." : "") + a);
+                }
+            }
+        }
+
+
+        // TraversalObject(scope);
+        // document.getElementById("1").oninput = function () {
+        //     if (this.getAttribute('ng-model')) {
+        //         scope[this.getAttribute('ng-model')] = this.value;
+        //         let a = this.getAttribute('ng-model');
+        //         [...document.querySelectorAll(`[ng-bind='${a}']`)].forEach(function (x) {
+
+        //             x.innerHTML = scope[a]
+
+        //         })
+        //     }
+        // };
+        [...document.querySelectorAll(`[ng-model]`)].forEach(function (x) {
+            let attr = x.getAttribute(`ng-model`)
+
+            x.oninput = function (v) {
+                // TraversalObject(scope, a);
+                let value = x.value;
+                [...document.querySelectorAll(`[ng-bind='${attr}']`)].forEach(function (x) {
+                    // console.log(this)
+                    console.log(value)
+                    TraversalObject(scope, attr, x, null, value)
+
+                })
+            }
+
+        });
+        [...document.querySelectorAll(`[ng-click]`)].forEach(function (x) {
+            x.onclick = function () {
+                $scope = JSON.parse(JSON.stringify(scope))
+                // console.log($scope)
+                // console.log(scope)
+                eval(x.getAttribute('ng-click'))
+                // console.log(scope)
+                TraversalObject2(scope)
+
+            }
+
+
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+:root {
+    --bg: #aaa;
+    --box: {
+        margin: 0;
+        padding: 0;
+    }
+    ;
+    --reset: {
+        @apply --box;
+        background-color: var(--bg);
+    }
+}
+
+body {
+    @apply --reset;
+}
