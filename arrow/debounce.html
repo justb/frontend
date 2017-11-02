@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            height: 200px;
+            width: 200px;
+            background: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+    </div>
+    <script>
+         count = 123
+        var count 
+        console.log(count)
+        function g() {
+            console.log(this)
+            document.getElementsByTagName('div')[0].innerHTML = ++count
+        }
+        var timer = setTimeout(()=>{}, 1000)
+        var debounce = (func, wait) => {
+            console.log(func)
+            var timer
+            return () => {
+                console.log(timer)
+                clearTimeout(timer)
+                timer = setTimeout(func, wait)
+            }
+        }
+        setInterval(()=>console.log(timer),1000)
+        document.getElementsByTagName('div')[0].onmousemove = debounce(g, 1000)
+
+    </script>
+</body>
+
+</html>
