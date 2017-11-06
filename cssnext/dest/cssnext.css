@@ -1,5 +1,35 @@
+:root {
+    $height: 16px;
+    $height: 1rem;
+    @function vr($amount) {
+        @return $height * $amount;
+    }
+}
+
+
+
 body {
   margin: 0;
   padding: 0;
   background-color: #aaa;
+}
+@media (max-width: 30rem) {
+    a{
+        color: red;
+        font-size: 2rem;
+    }
+}
+
+button,
+.button {
+  padding:16px;
+  padding:1rem;
+  
+  margin-top: vr(2);
+}
+button:hover,
+.button:hover,
+button:focus,
+.button:focus {
+  background-color:red;
 }

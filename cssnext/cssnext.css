@@ -5,12 +5,39 @@
         padding: 0;
     }
     ;
+    $height: 1rem;
     --reset: {
         @apply --box;
         background-color: var(--bg);
     }
+    --red: red;
+    --fontsize: 1rem;
+    @custom-media --small-viewport (max-width: 30rem);
+    @function vr($amount) {
+        @return $height * $amount;
+    }
 }
+
+@custom-selector :--button button, .button;
+@custom-selector :--enter :hover, :focus;
+
+
 
 body {
     @apply --reset;
+}
+@media (--small-viewport) {
+    a{
+        color: var(--red);
+        font-size: calc(var(--fontsize)*2);
+    }
+}
+
+:--button {
+  padding:1rem;
+  
+  margin-top: vr(2);
+}
+:--button:--enter {
+  background-color:var(--red);
 }

@@ -6,3 +6,7 @@ gulp.task('css', function () {
         .pipe(postcss())
         .pipe(gulp.dest('./cssnext/dest'));
 });
+
+gulp.task('watch', function() {
+    gulp.watch('./cssnext/*.css', ['css']);
+});
