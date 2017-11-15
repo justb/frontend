@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://cdn.bootcss.com/d3/4.11.0/d3.js"></script>
+</head>
+
+<body>
+</body>
+
+</html>
+<script>
+    var width = 300; //画布的宽度
+    var height = 300; //画布的高度
+
+    var svg = d3.select("body") //选择文档中的body元素
+        .append("svg") //添加一个svg元素
+        .attr("width", width) //设定宽度
+        .attr("height", height); //设定高度
+    var dataset = [250, 170, 170, 130, 90]; //数据（表示矩形的宽度）
+    var rectHeight = 50; //每个矩形所占的像素高度(包括空白)
+
+
+
+    var xz = d3.range(dataset.length)
+    // yz = d3.range(n).map(function () {
+    //     return bumps(m);
+    // }),
+    var x = d3.scaleBand()
+        .domain(xz)
+        .range([0, width - 30]).padding(0.1);
+    var y = d3.scaleBand()
+        .domain([width-30,0])
+        .range([0, width - 30])
+        .padding(0.05);
+
+
+    var xAxis = d3.axisBottom()
+        .scale(x);
+    var yAxis = d3.axisLeft()
+        .scale(y);
+    // var y = d3.scaleLinear()
+    //     .domain([0, y1Max])
+    //     .range([height, 0]);
+
+    var rects = svg.selectAll("svg")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("class","MyRect")
+    .attr("transform","translate(" + 30 + "," + 0 + ")")
+    .attr("x", function(d,i){
+        return x(i);
+    } )
+    .attr("y",function(d){
+        return y(d);
+    })
+    .attr("width", 40 )
+    .attr("height", function(d){
+        console.log(d)
+        return height -30 - y(d);
+    });
+
+    svg.append("g")
+        .attr("transform", "translate(0,270)")
+        .call(xAxis)
+        .selectAll("text")
+        //旋转x轴label
+        .attr("transform", "")
+    svg.append("g")
+        .attr("transform", "translate(30,0)")
+        .call(yAxis);
+</script>

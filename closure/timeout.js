@@ -7,7 +7,7 @@ for (var i = 0; i < 5; i++) {
 // a.map(x => setTimeout(() => console.log(x), x * 1000))
 
 for (var i = 0; i < 5; i++) {
-    (function () {
+    (function (i) {
         setTimeout(() => console.log(i), 1000 * i)
     })(i)
 }

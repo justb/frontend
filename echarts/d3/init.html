@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Transform Transitions</title>
+<style>
+    body {
+        margin: 0;
+    }
+
+    p {
+        width: 10%;
+        height: 10%;
+    }
+</style>
+
+<body>
+    <p>12312312</p>
+    <p>123</p>
+    <p>123</p>
+    <p>123</p>
+    <p>123</p>
+    <p>123</p>
+    <p>123</p>
+    <p>123</p>
+    <p>123</p>
+    <p>123</p>
+    <circle></circle>
+    <circle></circle>
+    <circle></circle>
+    <circle></circle>
+    <circle></circle>
+    <circle></circle>
+    <circle></circle>
+    <circle></circle>
+    <circle></circle>
+    <circle></circle>
+    <script src="https://cdn.bootcss.com/d3/4.11.0/d3.min.js"></script>
+    <script src="https://d3js.org/d3-axis.v1.min.js"></script>
+    <script src="https://d3js.org/d3-array.v1.min.js"></script>
+    <script src="https://d3js.org/d3-collection.v1.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-format.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+    <script src="https://d3js.org/d3-scale.v1.min.js"></script>
+    <script>
+        d3.selectAll("p").data(d3.range(10)).style("color", function (d) {
+            console.log(d)
+            return "hsl(" + d / 10 * 360 + ",100%,50%)";
+        });
+
+        d3.selectAll("p")
+            .data([4, 8, 15, 16, 23, 42])
+            .style("font-size", function (d) {
+                return d + "px";
+            });
+
+
+        var p = d3.select("body")
+            .selectAll("p")
+            .data([4, 8, 15, 16, 23, 42])
+            .text(function (d) {
+                return d;
+            });
+
+        // Enter…
+        p.enter().append("p")
+            .text(function (d) {
+                return d;
+            });
+
+        // Exit…
+        p.exit().remove();
+
+        d3.select("body").transition()
+            .style("background-color", "black");
+
+        d3.selectAll("circle").transition()
+            .duration(750)
+            .delay(function (d, i) {
+                return i * 10;
+            })
+            .attr("r", function (d) {
+                console.log(d)
+                return Math.sqrt( 100);
+            });
+    </script>
