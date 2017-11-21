@@ -1,0 +1,6 @@
+init: asyncId-6,type-WRITEWRAP,triggerAsyncId-4
+init: asyncId-7,type-TickObject,triggerAsyncId-1
+[object Object]before: asyncId-7
+destroy: asyncId-7
+before: asyncId-6
+destroy: asyncId-6
