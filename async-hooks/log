@@ -1,6 +1,40 @@
-init: asyncId-6,type-WRITEWRAP,triggerAsyncId-4
-init: asyncId-7,type-TickObject,triggerAsyncId-1
-[object Object]before: asyncId-7
-destroy: asyncId-7
+[object Object]init: asyncId-6,type-my-resource,triggerAsyncId-1
+init: asyncId-6, type-my-resource, triggerAsyncId-1
 before: asyncId-6
+before: asyncId-6
+init: asyncId-7,type-Timeout,triggerAsyncId-6
+init: asyncId-7, type-Timeout, triggerAsyncId-6
+init: asyncId-8,type-TIMERWRAP,triggerAsyncId-6
+init: asyncId-8, type-TIMERWRAP, triggerAsyncId-6
+after: asyncId-6
+after: asyncId-6
 destroy: asyncId-6
+destroy: asyncId-6
+before: asyncId-8
+before: asyncId-8
+before: asyncId-7
+before: asyncId-7
+init: asyncId-9,type-WRITEWRAP,triggerAsyncId-4
+init: asyncId-9, type-WRITEWRAP, triggerAsyncId-4
+init: asyncId-10,type-TickObject,triggerAsyncId-7
+init: asyncId-10, type-TickObject, triggerAsyncId-7
+after: asyncId-7
+after: asyncId-7
+after: asyncId-8
+after: asyncId-8
+before: asyncId-10
+before: asyncId-10
+after: asyncId-10
+after: asyncId-10
+destroy: asyncId-7
+destroy: asyncId-7
+destroy: asyncId-10
+destroy: asyncId-10
+destroy: asyncId-8
+destroy: asyncId-8
+before: asyncId-9
+before: asyncId-9
+after: asyncId-9
+after: asyncId-9
+destroy: asyncId-9
+destroy: asyncId-9
