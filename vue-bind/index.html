@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <script>
+        var a = {
+            'key': 123
+        }
+        a.key = 1
+        a.key = 2
+        console.log(a.key)
+
+
+        Object.defineProperty(a, 'key', {
+            get() {
+                console.log('get')
+            },
+            set(v) {
+                console.log(v)
+            }
+        })
+    </script>
+</body>
+
+</html>
