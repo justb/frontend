@@ -4,9 +4,9 @@ function a() {
     for (var i = 0; i < 3; i++) {
         var a = i
         array.push(
-            function () {
-                console.log(a)
-            }
+            (function(i) {
+                console.log(i)
+            })(i)
         )
     }
 
