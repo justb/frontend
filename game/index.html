@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+
+    .control {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    .control button{
+        height: 10vh;
+        width: 40%;
+        
+    }
+    .football {
+        border: 5px solid black;
+        border-radius: 100%;
+        position: relative;
+        height: 10vw;
+        left: 0;
+        width: 10vw;
+        /* animation: mymove 1s infinite;
+        -webkit-animation: mymove 1s infinite; */
+        transition: left 0.5s linear;
+    }
+
+    .to-right {
+        left: 88vw;
+    }
+
+    .to-left {
+        left: 0;
+    }
+    .leg{
+        width: 20vw;
+        height: 50vh;
+        border: 5px solid black;
+        transform: rotateZ(15deg) rotateY(180deg);
+        margin: 15vw;
+        box-sizing: border-box;
+        animation: legmove 1s infinite alternate;
+    }
+
+    @keyframes mymove {
+        from {
+            left: 0px;
+        }
+        to {
+            left: 85vw;
+        }
+    }
+
+    @keyframes legmove {
+        from {
+            transform: rotateZ(30deg);
+        }
+        to {
+            transform: rotateZ(15deg);
+        }
+    }
+
+    @-webkit-keyframes mymove {
+        from {
+            left: 0px;
+        }
+        to {
+            right: 0px;
+        }
+    }
+</style>
+
+<body>
+    <div class="leg">
+        
+    </div>
+    <div class="football"></div>
+    <div class="control">
+
+        <button type="">向左</button>
+        <button type="">向右</button>
+    </div>
+    <script>
+        var btn = document.querySelectorAll('button')
+        var football = document.querySelector('.football')
+        btn[0].onclick = function () {
+            football.setAttribute('class', 'football to-left')
+        }
+        btn[1].onclick = function () {
+            football.setAttribute('class', 'football to-right')
+        }
+    </script>
+</body>
+
+</html>

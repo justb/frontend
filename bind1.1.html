@@ -9,19 +9,31 @@
 </head>
 
 <body>
-    <input type="text" name="123" id="1" ng-model="kkk.f">
-    <span ng-bind="kkk.f"></span>
+    <input type="text" name="123" id="1" ng-model="kkk.f.f"> {{kkk.f.f}}
+    <span ng-bind="kkk.ff"></span>
     <button ng-click="change()">button</button>
     <script>
+        var reg = /\{\{.*\}\}/g
+        var root = document.querySelector(`body`)
+        var flag = root.innerHTML.match(reg)
+        console.log(flag)
+        root.innerHTML = root.innerHTML.replace(reg, (word) => {
+            return `<spa ng-bind='${word.replace(/\{/g, '').replace(/\}/g, '')}'></spa>`
+        })
         var scope = {};
         scope.kkk = {
-            f: "122223"
+            f: {
+                f: 1
+            }
         };
-        function change(){
-            scope.kkk.f=1
-        }
-        // console.log(scope)
 
+        function change() {
+            scope.kkk.f.f = 1
+            scope.kkk.ff = 'ff'
+        }
+        scope.kkk.f.f = 2
+        TraversalObject2(scope)
+        // console.log(scope)
         function TraversalObject(obj, attr, el, par, value) {
             for (var a in obj) {
                 if (((par ? par + "." : "") + a) === attr) {
@@ -37,20 +49,31 @@
 
         function TraversalObject2(obj, par) {
             for (var a in obj) {
-                console.log(((par ? par + "." : "") + a));
-                [...document.querySelectorAll(`[ng-model='${(par ? par + "." : "") + a}']`)].forEach(function (x) {
-                    x.value = obj[a]
-                });
-                [...document.querySelectorAll(`[ng-bind='${(par ? par + "." : "") + a}']`)].forEach(function (x) {
-                    x.innerHTML = obj[a]
-                });
                 if (typeof (obj[a]) == "object") {
                     TraversalObject2(obj[a], (par ? par + "." : "") + a);
+                } else {
+                    var name = (par ? par + "." : "") + a;
+                    [...document.querySelectorAll(`[ng-model='${name}']`)].forEach(function (x) {
+                        x.value = obj[a]
+                    });
+                    [...document.querySelectorAll(`[ng-bind='${name}']`)].forEach(function (x) {
+                        x.innerHTML = obj[a]
+                    });
                 }
             }
         }
 
-
+        function nodeToFragment(el) {
+            var fragment = document.createDocumentFragment();
+            var child = el.firstChild;
+            while (child) {
+                // 将Dom元素移入fragment中
+                fragment.appendChild(child);
+                child = el.firstChild
+            }
+            return fragment;
+        }
+        console.log(nodeToFragment(HTMLBodyElement));
         // TraversalObject(scope);
         // document.getElementById("1").oninput = function () {
         //     if (this.getAttribute('ng-model')) {
@@ -65,7 +88,6 @@
         // };
         [...document.querySelectorAll(`[ng-model]`)].forEach(function (x) {
             let attr = x.getAttribute(`ng-model`)
-
             x.oninput = function (v) {
                 // TraversalObject(scope, a);
                 let value = x.value;
@@ -73,10 +95,8 @@
                     // console.log(this)
                     console.log(value)
                     TraversalObject(scope, attr, x, null, value)
-
                 })
             }
-
         });
         [...document.querySelectorAll(`[ng-click]`)].forEach(function (x) {
             x.onclick = function () {
@@ -86,11 +106,7 @@
                 eval(x.getAttribute('ng-click'))
                 // console.log(scope)
                 TraversalObject2(scope)
-
             }
-
-
-
         })
     </script>
 </body>
