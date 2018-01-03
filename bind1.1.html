@@ -9,8 +9,9 @@
 </head>
 
 <body>
-    <input type="text" name="123" id="1" ng-model="kkk.f.f"> {{kkk.f.f}}
+    <input type="text" name="123" id="1" ng-model="kkk.f.f">
     <span ng-bind="kkk.ff"></span>
+    <div>{{kkk.f.f}}</div>
     <button ng-click="change()">button</button>
     <script>
         var reg = /\{\{.*\}\}/g
@@ -19,7 +20,8 @@
         console.log(flag)
         root.innerHTML = root.innerHTML.replace(reg, (word) => {
             return `<spa ng-bind='${word.replace(/\{/g, '').replace(/\}/g, '')}'></spa>`
-        })
+        });
+
         var scope = {};
         scope.kkk = {
             f: {
@@ -97,6 +99,10 @@
                     TraversalObject(scope, attr, x, null, value)
                 })
             }
+        });
+        [...document.querySelectorAll('spa')].forEach(function (item) {
+            item.parentNode.setAttribute('ng-bind', item.getAttribute('ng-bind'))
+            item.parentNode.innerHTML = item.innerHTML
         });
         [...document.querySelectorAll(`[ng-click]`)].forEach(function (x) {
             x.onclick = function () {
