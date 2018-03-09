@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="table"></div>
+    <div id='select'>
+        原生
+    </div>
+    <div id="example-1">
+        Vue
+        <select v-for="item in 3" v-model='v[item-1]'>
+            <option value=""></option>
+            <option v-for="(i,j) in items" :value="j" :disabled="v.includes(j)">{{ j }}</option>
+        </select>
+    </div>
+    <script>
+        const a = [
+            [1, 1, 1, 2],
+            [2, 3, 4, 5],
+            [3, 4, 5, 3]
+        ]
+        const length = a[0].length
+        let max = new Array(length)
+        max.fill([0, 0])
+        let html = '<table border="1">'
+        a.map((x, i) => {
+            html += '<tr>'
+            x.map((y, j) => {
+                if (y > max[j][0]) {
+                    max[j] = [y, i]
+                }
+                html += `<td>${y}</td>`
+            })
+            html += '</tr>'
+        })
+        html += '</table>'
+        document.querySelector('#table').innerHTML = html
+        max.map((x, i) => {
+            document.querySelectorAll('table tr td')[x[1] * length + i].style.color = 'red'
+        })
+    </script>
+    <script>
+        let b = new Array(10)
+        let c = `<option value=""></option>` + b.fill(0).map((x, i) => `<option value="${i}">${i}</option>`).reduce(
+            (a,
+                b) => a + b)
+        b.fill(0).map((x, i) => {
+            let s = document.createElement(`select`)
+            s.name = i
+            s.onchange = function (i) {
+                change(i)
+            }
+            s.innerHTML = c
+            document.querySelector('#select').appendChild(s)
+        })
+        let selected = new Array(10)
+
+        function change(index) {
+            let a = parseInt(document.querySelector(`[name="${index.target.name}"]`).value)
+            selected[index.target.name] = a
+            b.fill(0).map((x, i) => {
+                b.fill(0).map((x, j) => {
+                    if (selected.indexOf(j) < 0) {
+                        document.querySelector('#select').querySelectorAll('select')[i].querySelectorAll(
+                                'option')[j + 1].disabled =
+                            0
+                    }
+                })
+                document.querySelector('#select').querySelectorAll('select')[i].querySelectorAll(
+                    'option')[a + 1].disabled = 1
+            })
+        }
+    </script>
+    <script>
+        var v = new Vue({
+            el: '#example-1',
+            data: {
+                items: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                v: []
+            }
+        })
+    </script>
+</body>
+
+</html>
