@@ -1,10 +1,12 @@
 const p = () => new Promise((resolve, reject) => {
     setTimeout(() => {
-        resolve()
+        reject(123)
     }, 1000);
 })
-console.log(new Date())
+console.log(0)
 p().then(r => {
-    console.log(new Date())
-    p().then(r => console.log(new Date()))
-}).then(r => console.log(new Date()))
+        console.log(1)
+        p().then(r => console.log(2))
+    }).then(r => console.log(1))
+    .then(r => console.log(1))
+    .catch(e => console.log(e))
