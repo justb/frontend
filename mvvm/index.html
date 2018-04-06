@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+            <p>{{album.name}}</p>
+            <p>{{album.theme}}</p>
+    </div>
+    <script src="./index.js"></script>
+    <script>
+        console.log(observe)
+        let mvvm = observe({
+            song: '发如雪',
+            album: {
+                name: '十一月的萧邦',
+                theme: '夜曲'
+            },
+            singer: '周杰伦'
+
+        });
+        console.log(mvvm)
+        complie(mvvm, '#app')
+        setTimeout(() => {
+
+            mvvm.album.name = "七里香"
+        }, 1000);
+        setTimeout(() => {
+
+            mvvm.album.theme = "床边故事"
+        }, 10000);
+    </script>
+</body>
+
+</html>
