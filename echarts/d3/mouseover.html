@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="description" content="D3byEX 12.15" />
+    <meta charset="utf-8">
+</head>
+<body>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+        <script>
+        var width = 1000, height = 728;
+
+        var zoom = d3.behavior.zoom()
+            .scaleExtent([1, 5])
+            .on("zoom", moveAndZoom);
+
+        var svg = d3.select("body").append("svg")
+            .attr({ width: width, height: height })
+            .call(zoom);
+        var mainGroup = svg.append("g");
+        mainGroup.style({ stroke: "white", "stroke-width": "2px", "stroke-opacity": 0.0 });
+
+        var projection = d3.geo.mercator();
+        var path = d3.geo.path().projection(projection);
+
+        var url = 'https://gist.githubusercontent.com/d3byex/65a128a9a499f7f0b37d/raw/176771c2f08dbd3431009ae27bef9b2f2fb56e36/world-110m.json';
+        d3.json(url, function (error, world) {
+            var countries = topojson.feature(world, world.objects.countries).features;
+            var neighbors = topojson.neighbors(world.objects.countries.geometries);
+
+            var color = d3.scale.category20();
+            mainGroup.selectAll("path", "countries")
+                .data(countries)
+                .enter().append("path")
+                .attr("d", path)
+                .style("fill", function (d, i) {
+                    return color(d.color = d3.max(neighbors[i],
+                        function (n) { return countries[n].color; }) + 1 | 0);
+                });
+
+            mainGroup.selectAll("path")
+                .on("mouseover", function () {
+                    console.log("mouseover");
+                    d3.select(this).style("stroke-opacity", 1.0);
+                });
+            mainGroup.selectAll("path")
+                .on("mouseout", function () {
+                    d3.select(this).style("stroke-opacity", 0.0);
+                });
+        });
+
+        function moveAndZoom() {
+            var t = d3.event.translate;
+            var s = d3.event.scale;
+
+            var x = Math.min(
+                (width / height) * (s - 1),
+                Math.max(width * (1 - s), t[0]));
+
+            var h = height / 4;
+            var y = Math.min(
+                h * (s - 1) + h * s,
+                Math.max(height * (1 - s) - h * s, t[1]));
+
+            mainGroup.style("stroke-width", ((1 / s) * 2) + "px");
+            mainGroup.attr('transform', 'translate(' + x + ',' + y + ')scale(' + s + ')');
+        }
+    </script>
+</body>
+</html>
