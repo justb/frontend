@@ -3,7 +3,7 @@
 <style>
     .land {
         fill: #999;
-        stroke-opacity: 1;
+        /* stroke-opacity: 1; */
     }
 
     .graticule {
@@ -22,7 +22,7 @@
     }
 
     .noclicks {
-        pointer-events: none;
+        /* pointer-events: none; */ /*阻止鼠标事件*/
     }
 
     .point {
@@ -100,7 +100,7 @@
             .attr("height", height)
             .on("mousedown", mousedown)
             // .call(zoom)
-        var svg = svg.append("g").style({ stroke: "white", "stroke-width": "1px", "stroke-opacity": 0.0 });
+        var svg = svg.append("g").style({ stroke: "white", "stroke-width": "2px", "stroke-opacity": 0.0 });
 
         queue()
             .defer(d3.json,
@@ -137,7 +137,7 @@
             console.log(countries)
             var color = d3.scale.category20();
 
-            svg.selectAll("path", "countries")
+            svg.selectAll("path")
                 .data(countries)
                 .enter().append("path")
                 .attr("class", "land noclicks")
@@ -150,7 +150,7 @@
                 })
 
 
-            svg.selectAll("path", "countries")
+            svg.selectAll("path")
                 .on("mouseover", function () {
                     console.log("mouseover");
                     d3.select(this).style("stroke-opacity", 1);
