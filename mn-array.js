@@ -4,4 +4,4 @@ function mn(m,n){
     return mn
 }
 
-console.log(mn(5,3))
+console.log(mn(5,3));
