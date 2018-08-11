@@ -5,7 +5,7 @@ const port = 8080
 http
 	.createServer((req, res) => {
 		if (req.url.includes("world")) {
-			fs.readFile("./world2.json", "utf-8", function(err, data) {
+			fs.readFile("./world.json", "utf-8", function(err, data) {
 				res.writeHead(200, { "Content-Type": "text/html" })
 				res.write(data)
 				res.end()

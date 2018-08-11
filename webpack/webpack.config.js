@@ -2,6 +2,7 @@ const webpack = require("webpack")
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const WebpackDevServer = require("webpack-dev-server")
+console.log(process.env.NODE_ENV)
 module.exports = {
 	entry: {
 		vendor: ["react", "react-dom"],
@@ -17,7 +18,7 @@ module.exports = {
 	devServer: {
 		contentBase: path.join(__dirname, "dist"),
 		compress: false,
-        port: 9000,
+        port: 9001,
         open: true,
         hot: true,
         hotOnly: true

@@ -143,22 +143,48 @@
                 .attr("class", "land noclicks")
                 .attr("d", path)
                 .style("fill", function (d, i) {
+                    console.log(d)
+                    return "grey"
                     return color(d.color = d3.max(neighbors[i],
                         function (n) {
                             return countries[n].color;
                         }) + 1 | 0);
                 })
+                .attr("color", function (d, i) {
+                    console.log(d)
+                    return "grey"
+                    return color(d.color = d3.max(neighbors[i],
+                        function (n) {
+                            return countries[n].color;
+                        }) + 1 | 0);
+                })
+                .attr("country", function (d, i) {
+                    console.log(d)
+                    return countries[i].properties.name
+                })
 
 
             svg.selectAll("path")
                 .on("mouseover", function () {
-                    console.log("mouseover");
-                    d3.select(this).style("stroke-opacity", 1);
+                    if(d3.select(this).attr('country')=='China'){
+
+                    d3.select(this).style("fill", "red");
+                    }
                 });
                 
             svg.selectAll("path")
                 .on("mouseout", function () {
-                    d3.select(this).style("stroke-opacity", 0.0);
+
+                    if(d3.select(this).attr('country')=='China'){
+                        d3.select(this).style("fill", d3.select(this).attr('color'));
+                    }
+                });
+                svg.selectAll("path")
+                .on("click", function () {
+
+                    if(d3.select(this).attr('country')=='China'){
+                        alert(123)
+                    }
                 });
 
             svg.append("circle")

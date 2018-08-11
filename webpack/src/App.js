@@ -9,9 +9,9 @@ class App extends Component {
 		
 	}
 	render() {
-		return <div>this is root</div>
+		return <div>this is 123ro123123ot</div>
 	}
 }
 
-// export default hot(module)(App)
-export default App
+export default hot(module)(App)
+// export default App
