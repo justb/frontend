@@ -20,14 +20,15 @@
 
     </div>
     <script>
-         count = 123
-        var count 
+        count = 123
+        var count
         console.log(count)
+
         function g() {
             console.log(this)
             document.getElementsByTagName('div')[0].innerHTML = ++count
         }
-        var timer = setTimeout(()=>{}, 1000)
+        var timer = setTimeout(() => {}, 1000)
         var debounce = (func, wait) => {
             console.log(func)
             var timer
@@ -37,9 +38,27 @@
                 timer = setTimeout(func, wait)
             }
         }
-        setInterval(()=>console.log(timer),1000)
+        setInterval(() => console.log(timer), 1000)
         document.getElementsByTagName('div')[0].onmousemove = debounce(g, 1000)
 
+        function a() {
+            return ({
+                dispatch,
+                getState
+            }) => next => action => {
+                if (typeof action === 'function') {
+                    return action(dispatch, getState, extraArgument);
+                }
+
+                return next(action);
+            };
+        }
+        var arrow = function(){
+            return function(){
+                console.log(111)
+            }
+        }
+        arrow()()
     </script>
 </body>
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-top: 100px;
+        }
+
+        .transition {
+            visibility: visible;
+            transition: all 2s;
+            transform: translateX(300px)
+        }
+
+        .transition2 {
+            transition: all 0s;
+            transform: translateX(0px);
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+        <button >Move</button>
+        <button>bounce</button>
+    <div>123</div>
+    <div class="boun">123</div>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script>
+        $(function () {
+            console.log(123)
+            $('button').eq(0).click(function move() {
+                document.querySelector('div').setAttribute('class', 'transition')
+                setTimeout(() => {
+                    document.querySelector('div').setAttribute('class', 'transition transition2')
+                    document.querySelector('div').setAttribute('class', '')
+                }, 2000);
+            })
+            $('button').eq(1).click(function bounce (){
+                $('.boun').addClass('animated bounce')
+                setTimeout(() => {
+                    $('.boun').removeClass('animated bounce')
+                }, 1000);
+            })
+            
+        })
+    </script>
+</body>
+
+</html>
