@@ -19,7 +19,7 @@ Son.prototype.getMoney = function() {
 }
 //创建Son类型的对象
 var son1 = new Son()
-
+console.log(son1.age)
 //发现不仅可以访问Son中定义属性和Son原型中定义的方法，也可以访问Father中定义的属性和Father原型中的方法。
 //这样就通过继承完成了类型之间的继承。
 // Son继承了Father中的属性和方法，当然还有Father原型中的属性和方法。
@@ -27,7 +27,7 @@ son1.giveMoney()
 son1.getMoney()
 console.log('Father定义的属性：' + son1.name)
 console.log('Son中定义的属性：' + son1.age)
-
+// console.log(age)
 ////
 function Father(name, age) {
   this.name = name
@@ -36,7 +36,7 @@ function Father(name, age) {
 //这样直接调用，那么father中的this只的是 window。 因为其实这样调用的： window.father("李四", 20)
 // name 和age 属性就添加到了window属性上
 Father('李四', 20)
-console.log('name:' + name + '\nage:' + age)
+console.log('name:' + name + ' age:' + age)
 
 //使用call方法调用，则可以改变this的指向
 function Son(name, age, sex) {
@@ -45,7 +45,7 @@ function Son(name, age, sex) {
   Father.call(this, name, age)
 }
 var son = new Son('张三', 30, '男')
-console.log('name:' + son.name + '\nage:' + son.age + '\nsex:' + son.sex)
+console.log('name:' + son.name + ' age:' + son.age + ' sex:' + son.sex)
 console.log(son instanceof Father) //false
 
 function Car(name,color) {
@@ -57,15 +57,17 @@ function Car(name,color) {
 }
 
 function Bwm(name,color) {
-  Car(this,name,color)
+  Car.call(this,name,color)
   Bwm.prototype.run2 = function() {
     console.log('i can run faster')
   }
 }
 
-Bwm.prototype = new Car()
+Bwm.prototype = Car.prototype
+
+console.log(Bwm.prototype.constructor)
 
 var bwm = new Bwm('宝马','蓝色')
 
 console.log(bwm.name,bwm.color)
-bwm.run2()
+bwm.run()
