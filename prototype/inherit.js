@@ -7,19 +7,22 @@ Father.prototype.giveMoney = function() {
   console.log('我是Father原型中定义的方法')
 }
 //再定义一个构造函数。
-function Son() {
+function Son1(age) {
   //添加age属性
-  this.age = 18
+  this.age = age
 }
 //关键地方：把Son构造方法的原型替换成Father的对象。
-Son.prototype = new Father()
+Son1.prototype = new Father()
 //给Son的原型添加getMoney方法
-Son.prototype.getMoney = function() {
+Son1.prototype.getMoney = function() {
   console.log('我是Son的原型中定义的方法')
 }
 //创建Son类型的对象
-var son1 = new Son()
+var son1 = new Son1(113)
 console.log(son1.age)
+Son1.prototype.constructor = Son1;
+console.log(son1.constructor.toString())
+console.log(son1.constructor===Son1.prototype.constructor)
 //发现不仅可以访问Son中定义属性和Son原型中定义的方法，也可以访问Father中定义的属性和Father原型中的方法。
 //这样就通过继承完成了类型之间的继承。
 // Son继承了Father中的属性和方法，当然还有Father原型中的属性和方法。

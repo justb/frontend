@@ -2,15 +2,16 @@ import a from "./a"
 import b from "./b"
 import React, { Component } from "react"
 import ReactDOM from "react-dom"
+import './app.styl'
 a()
 b()
 
 class Launcher extends Component {
 	render() {
-		return <div>this is launch</div>
+		return <div className='test'>this is launch</div>
 	}
 }
-import('./App').then(App => ReactDOM.render(<App.default />, document.getElementById("root")))
+// import('./App').then(App => ReactDOM.render(<App.default />, document.getElementById("root")))
 ReactDOM.render(<Launcher />, document.getElementById("launch"))
 
 // if (module.hot) {

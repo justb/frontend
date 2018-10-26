@@ -34,6 +34,17 @@ module.exports = {
 					}
 				],
 				exclude: /\.styl$/
+			},
+			{
+				test: /\.styl$/,
+				use: ['style-loader', 'css-loader', {
+					loader: 'stylus-loader',
+					options: {
+						import: path.resolve(__dirname, './webpack/common.styl'),
+						path: ''
+					}
+				}],
+				exclude: /node_modules/
 			}
 		]
 	},

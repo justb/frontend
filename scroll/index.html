@@ -7,148 +7,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        .fixed {
-            position: fixed;
-            top: 50px;
-            background-color: red;
-            left: 300px;
+        body{
+            padding: 0;
+            margin:0;
+        }
+        .inner {
+            height: 150vh;
+        }
+        .wrapper{
+            height: 100vh;
         }
     </style>
-    <script>
-        window.onscroll = function () {
-            let f = document.getElementsByClassName('fixed')[0]
-            console.log(f.offsetTop)
-            console.log(f.scrollTop)
-            console.log(f.offsetParent)
-        }
-    </script>
+    
 </head>
 
 <body>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div class="fixed">123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    <div>123</div>
-    123 123 123 123
+    <svg class="wrapper">
+        <g class="inner"></g>
+    </svg>
+    <script>
+            let f = document.querySelector('.wrapper')
+            window.onscroll = function () {
+                console.log(f)
+            }
+        </script>
 </body>
 
 </html>
