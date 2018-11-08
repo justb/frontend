@@ -2,7 +2,6 @@ const webpack = require("webpack")
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const WebpackDevServer = require("webpack-dev-server")
-console.log(process.env.NODE_ENV)
 module.exports = {
 	entry: {
 		vendor: ["react", "react-dom"],
@@ -40,10 +39,18 @@ module.exports = {
 				use: ['style-loader', 'css-loader', {
 					loader: 'stylus-loader',
 					options: {
-						import: path.resolve(__dirname, './webpack/common.styl'),
-						path: ''
+						// preferPathResolver: 'webpack',
+						import:  path.resolve(__dirname,'./src/common.styl')
+						
 					}
-				}],
+				}, 
+				// {
+				// 	loader: path.resolve(__dirname, '../stylus-resources-loader/index.js'),
+				// 	options: {
+				// 		import: path.resolve(__dirname, './src/common.styl')
+				// 	}
+				// }
+			],
 				exclude: /node_modules/
 			}
 		]
