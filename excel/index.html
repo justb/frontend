@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/orgchart/2.1.3/css/jquery.orgchart.css" rel="stylesheet">
+</head>
+
+<body>
+    <input type="file" onchange="importf(this)" />
+    <button onclick="dlimg()">download</button>
+    <div id='chart-container'></div>
+    <script src="https://cdn.bootcss.com/es6-promise/4.1.1/es6-promise.auto.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/xlsx/0.14.1/xlsx.full.min.js"></script>
+    <script src="https://cdn.bootcss.com/orgchart/2.1.3/js/jquery.orgchart.js"></script>
+    <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+    <script src="https://cdn.bootcss.com/jspdf/1.5.3/jspdf.debug.js"></script>
+
+    <script>
+        console.log(XLSX)
+        setTimeout(() => {
+            document.querySelector('input').click()
+        }, 500);
+        function dlimg() {
+            html2canvas(document.querySelector(".orgchart"), {
+                onrendered: function (canvas) {
+                    var img = document.createElement('a');
+                    img.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+                    img.download = 'case.jpg';
+                    img.click();
+                },
+                background: "#fff"
+            });
+        }
+
+        function importf(obj) {
+
+            var f = obj.files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var data = e.target.result;
+
+                wb = XLSX.read(data, {
+                    type: 'binary'
+                });
+
+                //wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
+                //wb.Sheets[Sheet名]获取第一个Sheet的数据
+                var data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]])
+                console.log(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]))
+                var rs = {
+                    name: 'ALL',
+                    children: []
+                }
+                data.some(item => {
+                    if (!data.filter(i => i.child === item.mother).length) {
+                        rs.children.push(
+                            item.mother
+                        )
+                    }
+                })
+                rs.children = [...new Set(rs.children)].map(item => ({
+                    name: item,
+                    children: []
+                }))
+
+                function t(rs) {
+
+                    let flag = false
+                    data.some(r => {
+                        rs.children.some(item => {
+                            if (item.name === r.mother) {
+                                item.children.push({
+                                    name: r.child,
+                                    children: []
+                                })
+                                flag = true
+                            }
+                        })
+
+                    })
+                    if (flag) {
+                        rs.children.some(item => {
+                            t(item)
+                        })
+                    }
+
+                }
+
+                let res = t(rs);
+
+                console.log(rs);
+                var oc = $('#chart-container').orgchart({
+                    'data': rs,
+                    // 'nodeContent': 'name',
+                    'visibleLevel': 100,
+                    'exportFilename': 'MyOrgChart',
+                    'exportButton': true,
+                    'direction': 'l2r'
+                });
+            };
+            reader.readAsBinaryString(f);
+        }
+    </script>
+</body>
+
+</html>

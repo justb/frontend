@@ -1,0 +1,41 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta charset="utf-8"/>  
+<title>异步加载</title>  
+<style type="text/css">  
+    html{height:100%}    
+    body{height:100%;margin:0px;padding:0px}    
+    #container{height:100%}    
+</style> 
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript">  
+function initialize() {  
+    var map = new BMap.Map("container");   
+    var point = new BMap.Point(116.404, 39.915); 
+    map.centerAndZoom(point, 15);  
+}  
+
+function query(e) {  
+    console.log(e)
+}  
+   
+function loadScript() {  
+  var script = document.createElement("script");  
+  script.src = "http://api.map.baidu.com/api?v=3.0&ak=jGXKp020lrcd06XRE1xIunB2j4vtDQUh&callback=initialize";
+  document.body.appendChild(script);  
+}  
+   
+window.onload = loadScript;  
+// setTimeout(() => {
+//     $.get({url: 'http://api.map.baidu.com/location/ip', data: {ip: '182.50.124.75',ak: 'jGXKp020lrcd06XRE1xIunB2j4vtDQUh'},dataType: 'json',success : (res)=>{
+//         console.log(res)
+//     }})
+// }, 1000);
+</script>
+<script src="http://api.map.baidu.com/location/ip?ak=jGXKp020lrcd06XRE1xIunB2j4vtDQUh&callback=query"></script>
+</head>  
+<body>
+    <div id="container"></div> 
+</body>  
+</html>

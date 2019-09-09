@@ -3,7 +3,7 @@ function Father() {
   this.name = '马云'
 }
 //给Father的原型添加giveMoney方法
-Father.prototype.giveMoney = function() {
+Father.prototype.giveMoney = function () {
   console.log('我是Father原型中定义的方法')
 }
 //再定义一个构造函数。
@@ -14,7 +14,7 @@ function Son1(age) {
 //关键地方：把Son构造方法的原型替换成Father的对象。
 Son1.prototype = new Father()
 //给Son的原型添加getMoney方法
-Son1.prototype.getMoney = function() {
+Son1.prototype.getMoney = function () {
   console.log('我是Son的原型中定义的方法')
 }
 //创建Son类型的对象
@@ -22,7 +22,7 @@ var son1 = new Son1(113)
 console.log(son1.age)
 Son1.prototype.constructor = Son1;
 console.log(son1.constructor.toString())
-console.log(son1.constructor===Son1.prototype.constructor)
+console.log(son1.constructor === Son1.prototype.constructor)
 //发现不仅可以访问Son中定义属性和Son原型中定义的方法，也可以访问Father中定义的属性和Father原型中的方法。
 //这样就通过继承完成了类型之间的继承。
 // Son继承了Father中的属性和方法，当然还有Father原型中的属性和方法。
@@ -51,17 +51,17 @@ var son = new Son('张三', 30, '男')
 console.log('name:' + son.name + ' age:' + son.age + ' sex:' + son.sex)
 console.log(son instanceof Father) //false
 
-function Car(name,color) {
+function Car(name, color) {
   this.name = name
   this.color = color
-  Car.prototype.run = function() {
+  Car.prototype.run = function () {
     console.log('i can run')
   }
 }
 
-function Bwm(name,color) {
-  Car.call(this,name,color)
-  Bwm.prototype.run2 = function() {
+function Bwm(name, color) {
+  Car.call(this, name, color)
+  Bwm.prototype.run2 = function () {
     console.log('i can run faster')
   }
 }
@@ -70,7 +70,7 @@ Bwm.prototype = Car.prototype
 
 console.log(Bwm.prototype.constructor)
 
-var bwm = new Bwm('宝马','蓝色')
+var bwm = new Bwm('宝马', '蓝色')
 
-console.log(bwm.name,bwm.color)
+console.log(bwm.name, bwm.color)
 bwm.run()

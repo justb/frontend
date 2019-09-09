@@ -22,9 +22,104 @@
 </head>
 
 <body>
-    <svg class="wrapper">
-        <g class="inner"></g>
-    </svg>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
     <script>
             let f = document.querySelector('.wrapper')
             window.onscroll = function () {
@@ -32,5 +127,40 @@
             }
         </script>
 </body>
+<script>
+    let distance = undefined
+    let hasInsert = false
 
+    let node =document.createElement('div')
+    window.onscroll = e=>{
+        
+        // alert(e)
+    }
+    window.ontouchstart = e=>{
+        if(!document.documentElement.scrollTop&&!document.body.scrollTop){
+            distance=e.changedTouches[0].pageY
+            console.log('start:'+e.changedTouches[0].pageY,hasInsert)
+        }
+    }
+    window.ontouchmove = e=>{
+            console.log(e.changedTouches[0].pageY,distance)
+            if(e.changedTouches[0].pageY-distance<0){
+                distance = undefined
+            }
+        if(e.changedTouches[0].pageY-distance>20 && !hasInsert){
+            // alert(distance)
+            // alert([document.documentElement.scrollTop,document.body.scrollTop].join(','))
+            node.innerHTML='999'
+            document.body.insertBefore(node,document.body.childNodes[0])
+            hasInsert = true
+        }
+    }
+    window.ontouchend = e=>{
+        if(hasInsert == true){
+            distance = undefined
+            hasInsert = false
+        document.body.removeChild(node)
+        }
+    }
+</script>
 </html>

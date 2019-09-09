@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    2
+    <!-- <iframe id="otherPage'" src="http://localhost:3000" frameborder="0"></iframe> -->
+    <script>
+        function sendPost() {        
+                // 获取id为otherPage的iframe窗口对象        
+                var iframeWin = document.getElementById("otherPage").contentWindow;        
+                // 向该窗口发送消息        
+                iframeWin.postMessage(document.getElementById("message").value, 
+                    'http://moweide.gitcafe.io');    
+        }    
+        // 监听跨域请求的返回    
+        window.addEventListener("message", function(event) {     
+            localStorage.setItem('a',event.data)   
+            console.log( event.data);    
+        }, false);
+    </script>
+</body>
+</html>

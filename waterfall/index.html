@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        
+        <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+        <script>
+            document.cookie = 'zg_did=%7B%22did%22%3A%20%22167e1175812d6-00b734af6f2b16-10306653-384000-167e117581390b%22%7D; COMMON_SESSION=3E0981B34D4ED2AF; zg_6d92a4b5c7c14345905ec338448e1a1a=%7B%22sid%22%3A%201547531911437%2C%22updated%22%3A%201547531912064%2C%22info%22%3A%201547434538738%2C%22superProperty%22%3A%20%22%7B%5C%22info_target%5C%22%3A%20%5C%22self_info%5C%22%7D%22%2C%22platform%22%3A%20%22%7B%7D%22%2C%22utm%22%3A%20%22%7B%7D%22%2C%22referrerDomain%22%3A%20%22%22%2C%22cuid%22%3A%20%22weiyuan%40wecash.net%22%2C%22landHref%22%3A%20%22http%3A%2F%2Flocalhost%3A3000%2F%22%7D; zg_3163ca217519403cad5df96b7efbac93=%7B%22sid%22%3A%201547541276047%2C%22updated%22%3A%201547545017942%2C%22info%22%3A%201547020231942%2C%22superProperty%22%3A%20%22%7B%5C%22%E5%BA%94%E7%94%A8%E5%90%8D%E7%A7%B0%5C%22%3A%20%5C%22BI%5C%22%7D%22%2C%22platform%22%3A%20%22%7B%7D%22%2C%22utm%22%3A%20%22%7B%7D%22%2C%22referrerDomain%22%3A%20%22%22%2C%22landHref%22%3A%20%22http%3A%2F%2Flocalhost%3A3002%2F%22%2C%22cuid%22%3A%20%22weiyuan%40wecash.net%22%7D; SESSION=359f9d3b-053f-4cd8-884c-efd5563cc670; io=eG5djyMLqCnuMeKgAAAD'
+            
+            var instance = axios.create({
+                withCredentials: true,
+                headers:{'Content-Type': 'application/json;charset=UTF-8'}
+            });
+            instance.post('http://localhost:3000/api/annualParty/photos',{
+                withCredentials: true,
+                data:{
+                    currentPage: 1, pageSize: 10
+                }
+            })
+        </script>
+</body>
+</html>
